@@ -1,21 +1,15 @@
 const express = require("express");
 
 const { getAll, get, add, replace, remove } = require("../data/data");
-const {
-  isValidText,
-  isValidDate,
-  isValidImageUrl,
-  isValidPrice,
-} = require("../util/validation");
+const { isValidText, isValidPrice } = require("../util/validation");
 
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
-  console.log("called");
   try {
-    const listing = await getAll();
+    const listings = await getAll();
 
-    res.json({ listing });
+    res.json({ listings });
   } catch (error) {
     next(error);
   }
@@ -31,11 +25,14 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
+  console.log("called");
   const data = req.body;
+  console.log("this is the data,", data);
+  console.log("called");
 
   let errors = {};
 
-  if (!isValidText(data.title)) {
+  if (!isValidText(data.name)) {
     errors.title = "Invalid title.";
   }
 
@@ -43,13 +40,6 @@ router.post("/", async (req, res, next) => {
     errors.description = "Invalid description.";
   }
 
-  if (!isValidDate(data.date)) {
-    errors.date = "Invalid date.";
-  }
-
-  if (!isValidImageUrl(data.image)) {
-    errors.image = "Invalid image.";
-  }
   if (!isValidPrice(data.price)) {
     errors.price = "Invalid Price.";
   }
@@ -62,6 +52,7 @@ router.post("/", async (req, res, next) => {
   }
 
   try {
+    console.log("we are getting here");
     await add(data);
     res.status(201).json({ message: "listing saved.", listing: data });
   } catch (error) {
@@ -74,26 +65,20 @@ router.patch("/:id", async (req, res, next) => {
 
   let errors = {};
 
-  if (!isValidText(data.title)) {
-    errors.title = "Invalid title.";
+  if (!isValidText(data.name)) {
+    errors.name = "Invalid name.";
   }
 
   if (!isValidText(data.description)) {
     errors.description = "Invalid description.";
   }
 
-  if (!isValidDate(data.date)) {
-    errors.date = "Invalid date.";
-  }
-
-  if (!isValidImageUrl(data.image)) {
-    errors.image = "Invalid image.";
-  }
   if (!isValidPrice(data.price)) {
     errors.price = "Invalid Price.";
   }
 
   if (Object.keys(errors).length > 0) {
+    console.log(errors);
     return res.status(422).json({
       message: "Updating the event failed due to validation errors.",
       errors,
@@ -111,7 +96,7 @@ router.patch("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     await remove(req.params.id);
-    res.json({ message: "Event deleted." });
+    res.json({ message: "Listing deleted." });
   } catch (error) {
     next(error);
   }

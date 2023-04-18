@@ -1,12 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "Land",
-      "date": "2023-02-22",
-      "image": "https://www.shutterstock.com/image-photo/large-yellow-wheel-loader-aligns-piece-1728626515",
-      "description": "Prime land for sale for real estate.",
-      "price": "ksh 5000"
-    }
-  ]
-}
+{"listings":[{"name":"Pedem Fats","price":"6500","description":"useherati","id":"ba76f829-9c2c-431d-85c7-a02fe2b49067"},{"name":"Freedom Heights !!","price":"ksh 200,000","description":"Life is for the Living","id":"2fdfed84-3ed6-4f56-b335-fe2cbb80a0a6"},{"name":"Freedom Heights","description":"Life is for the Living","price":"ksh 200,000","id":"84cb915c-828f-4265-bfa8-35f7f96be4aa"},{"id":"1a","name":"Mwea ridges","description":"a  prime property for residential developments ","price":"ksh 5000"},{"id":"3c","name":"Syokimau ridges","description":"a  prime property for residential developments ","price":"ksh 15000"}]}
